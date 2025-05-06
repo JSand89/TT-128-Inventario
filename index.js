@@ -3,15 +3,15 @@ const mongoose = require("mongoose")
 require("dotenv").config()
 
 const holaRoutes = require("./routes/holaMundo.routes")
+const entregasRoutes = require("./routes/entregas.routes")
 const app = express()
 const PORT = process.env.PORT || 3006
 
-app.set("port",PORT)
-app.use("/api/hola",holaRoutes)
 
-app.get("/",(req,res)=>{
-    res.send("Hola mundo")
-})
+app.set("port",PORT)
+app.use(express.json())
+app.use("/api/hola",holaRoutes)
+app.use("/api/entregas",entregasRoutes)
 
 mongoose.connect(process.env.MONGO_URI)
 .then(console.log("Base de datos conectada"))
